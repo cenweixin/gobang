@@ -1,0 +1,98 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: rgb(238, 231, 226);
+}
+
+#title{
+  position: relative;
+  text-align: center;
+  font-size: 18px;
+  margin: 40px 0;
+}
+#title:before {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-120px);
+  content: '';
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-image: radial-gradient(#666 0%, black 50%);
+}
+#title:after {
+  position: absolute;
+  left: 50%;
+  transform: translateX(90px);
+  content: '';
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-image: radial-gradient(#ddd 0%, white 80%);
+}
+#result{
+  font-size:16px;
+  color: #f00;
+  text-align: center;
+}
+
+canvas {
+  display: block;
+  /* padding: 20px; */
+  margin: 0 auto;
+  box-shadow: 0px 0px 2px 2px #ccc;
+  cursor: pointer;
+  background-color: #ffe4c4;
+  animation: rotate 1s;
+}
+
+#chessboard-dom {
+  position: relative;
+  margin: 0 auto;
+  /* width: 610px;
+  height: 610px; */
+  /* background-color: #ffe4c4; */
+  animation: rotate .5s;
+  font-size: 0;
+  box-shadow: 0px 0px 2px 2px #ccc;
+}
+
+#logo {
+  display: inline-block;
+  font-size: 12px;
+  color: #999;
+  transform: scale(0.6);
+}
+
+#control{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+#control span{
+  background: #999;
+  padding: 6px 10px;
+  margin-top: 20px;
+  margin-left: 20px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateY(0deg)
+  }
+  /* 10% {
+    transform: rotateY(-180deg);
+  } */
+  50% {
+    transform: rotateY(90deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}

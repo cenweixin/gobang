@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>gobang</title>
+  <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+  <h3 id="title">Canvas版 五子棋</h3>
+  <div id="result"></div>
+  <canvas id="chessboard"></canvas>
+  <div id="chessboard-dom">
+    <p id="logo">dom 版本</p>
+  </div>
+  <div id="control">
+    <span id="toggle">切换DOM版</span>
+    <span id="restart">重新开始</span>
+    <span id="regretChess">悔棋</span>
+    <span id="revokedRegretChess">撤销悔棋</span>
+  </div>
+  <script src="./utils.js"></script>
+  <script src='./index.js'></script>
+  <script>
+    const title = document.querySelector('#title')
+    const toggle = document.querySelector('#toggle')
+    const chessboard = document.querySelector('#chessboard')
+    const chessboardDom = document.querySelector('#chessboard-dom')
+    chessboardDom.style.display = 'none'
+    let flag = false
+    toggle.onclick = () => {
+      flag = !flag
+      flag ? chessboard.style.display = 'none' : chessboard.style.display = 'block'
+      !flag ? chessboardDom.style.display = 'none' : chessboardDom.style.display = 'block'
+      toggle.innerText = flag ? '切换Canvas版' : '切换DOM版'
+      title.innerText = flag ? 'DOM版 五子棋' : 'Canvas版 五子棋'
+      let VERSION = flag ? 'dom' : 'canvas'
+      gobang.init({VERSION})
+    }
+  </script>
+</body>
+</html>
