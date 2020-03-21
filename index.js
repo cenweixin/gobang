@@ -2,9 +2,9 @@ class Gobang {
   constructor(options) {
     this.options = options
     // 获取棋盘画布
-    this.chessboard = document.querySelector(options.canvas || '#chessboard')
+    this.chessboardCanvas = document.querySelector(options.canvas || '#chessboard')
     // 画布上下文对象
-    this.context = this.chessboard.getContext('2d')
+    this.context = this.chessboardCanvas.getContext('2d')
     // 获取结果展示节点
     this.result = document.querySelector('#result')
 
@@ -44,9 +44,11 @@ class Gobang {
 
   // 画出棋盘
   drawChessboard() {
-    const { context, options, chessboard } = this
-    const { count, latticeWidth, borderColor, lineWidth, padding } = options.gobangStyle
-    chessboard.width = chessboard.height = (count - 1) * latticeWidth + padding * 2 // 设置棋盘宽高  
+    const { context, options, chessboardCanvas } = this
+    const { count, latticeWidth, borderColor, lineWidth, padding, chessboardColor } = options.gobangStyle
+    chessboardCanvas.width = chessboardCanvas.height = (count - 1) * latticeWidth + padding * 2 // 设置棋盘宽高
+    context.fillStyle = chessboardColor
+    context.fillRect(0, 0, (count - 1) * latticeWidth + padding * 2, (count - 1) * latticeWidth + padding * 2) // 绘制棋盘背景
     context.lineWidth = lineWidth // 线宽
     context.strokeStyle = borderColor // 线颜色
     for (let i = 0; i < count; i++) {
@@ -67,7 +69,7 @@ class Gobang {
     context.fillStyle = '#999'
     context.fillText('canvas 版本', 10, 4)
     // 监听落子操作
-    this.listenDownChessman(chessboard)
+    this.listenDownChessman(chessboardCanvas)
   }
 
   // 初始棋盘矩阵
@@ -213,6 +215,7 @@ class Gobang {
   // 落子
   listenDownChessman(chessboard) {
     console.log('chessboard:', chessboard)
+    this.chessboard = chessboard
     const { latticeWidth, padding } = this.options.gobangStyle
     chessboard.onclick = event => {
       // 获得落子相对棋盘(包括padding)的坐标
@@ -301,14 +304,15 @@ class Gobang {
         'position': 'absolute',
         'top': 0 + 'px',
         'left': 0 + 'px',
-        'zIndex': 2
+        'zIndex': 2,
+        'cursor': 'pointer'
       }
       let chessboardDomCover = Utils.createElement({el, parent, style})
       chessboardDomCover.id = 'chessboardDomCover'
       this.chessboardDomCover = chessboardDomCover
-      // 监听落子操作
-      this.listenDownChessman(chessboardDomCover)
     }
+    // 监听落子操作
+    this.listenDownChessman(chessboardDomCover)
   }
 }
 
@@ -317,7 +321,7 @@ const gobang = new Gobang({
   canvas: '#chessboard',
   role: 1, // 角色 1黑棋 2白棋 ，这里是黑棋先下
   gobangStyle: {
-    chessboardColor: '#ffe4c4',
+    chessboardColor: '#f3cc9c', // 棋盘颜色
     count: 20, // 棋盘边数
     latticeWidth: 30, // 棋盘每小格宽度
     borderColor: '#999', // 棋盘描边颜色

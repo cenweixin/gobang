@@ -44,8 +44,8 @@ canvas {
   margin: 0 auto;
   box-shadow: 0px 0px 2px 2px #ccc;
   cursor: pointer;
-  background-color: #ffe4c4;
-  animation: rotate 1s;
+  /* background-color: #f3cc9c; */
+  animation: rotate .8s;
 }
 
 #chessboard-dom {
@@ -54,7 +54,7 @@ canvas {
   /* width: 610px;
   height: 610px; */
   /* background-color: #ffe4c4; */
-  animation: rotate .5s;
+  animation: rotate .8s;
   font-size: 0;
   box-shadow: 0px 0px 2px 2px #ccc;
 }
